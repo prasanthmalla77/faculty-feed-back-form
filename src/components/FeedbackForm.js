@@ -5,6 +5,8 @@ import top from "../images/top.png";
 import html2pdf from "html2pdf.js";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../firebase";
+import Data from "./Data";
+import { Link } from "react-router-dom";
 
 const FeedbackForm = () => {
   const [formData, setFormData] = useState({
@@ -19,7 +21,6 @@ const FeedbackForm = () => {
     feedback: "",
   });
 
-  // const formRef = useRef(null);
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -27,6 +28,7 @@ const FeedbackForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      console.log(formData);
       const docRef = await addDoc(
         collection(db, "feedback-form-data"),
         formData
@@ -35,20 +37,6 @@ const FeedbackForm = () => {
     } catch (e) {
       console.error("Error adding document: ", e);
     }
-    // Send form data to the backend
-    // axios
-    //   .post("http://localhost:4000/api/feedback", formData)
-    //   .then((response) => {
-    //     console.log(response.data);
-    //     if (response.data.message === true) {
-    //       alert("Thank you for your feedback!");
-
-    //       window.location.reload();
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.error(error);
-    //   });
   };
 
   const handlePrint = () => {
@@ -181,6 +169,11 @@ const FeedbackForm = () => {
         <br />
         <Button variant="contained" onClick={handleSaveAsPDF}>
           Save as PDF
+        </Button>
+        <br />
+        <br />
+        <Button variant="contained" LinkComponent={Link} to="/data">
+          Data
         </Button>
       </form>
     </Box>
