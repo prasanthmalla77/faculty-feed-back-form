@@ -1,14 +1,13 @@
 import React, { useState } from "react";
-import { TextField, Button, Box } from "@mui/material";
-// import axios from "axios";
+import { TextField, Button, Box, Snackbar, Alert } from "@mui/material";
 import top from "../images/top.png";
 import html2pdf from "html2pdf.js";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../firebase";
-import Data from "./Data";
 import { Link } from "react-router-dom";
 
 const FeedbackForm = () => {
+  const [open, setOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     registeredNumber: "",
@@ -21,6 +20,13 @@ const FeedbackForm = () => {
     feedback: "",
   });
 
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -34,6 +40,7 @@ const FeedbackForm = () => {
         formData
       );
       console.log("Document written with ID: ", docRef.id);
+      setOpen(true);
     } catch (e) {
       console.error("Error adding document: ", e);
     }
@@ -157,24 +164,35 @@ const FeedbackForm = () => {
         />
         <br />
         <br />
-        <Button type="submit" variant="contained" color="primary">
-          Submit
-        </Button>
-        <br />
-        <br />
-        <Button variant="contained" onClick={handlePrint}>
-          Print
-        </Button>
-        <br />
-        <br />
-        <Button variant="contained" onClick={handleSaveAsPDF}>
-          Save as PDF
-        </Button>
-        <br />
-        <br />
-        <Button variant="contained" LinkComponent={Link} to="/data">
-          Data
-        </Button>
+        <Box sx={{ display: "flex", justifyContent: "center", gap: 2 }}>
+          <Button type="submit" variant="contained" color="primary">
+            Submit
+          </Button>
+          <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+            <Alert
+              onClose={handleClose}
+              severity="success"
+              sx={{ width: "100%" }}
+            >
+              Form successfully Submitted!
+            </Alert>
+          </Snackbar>
+          <br />
+          <br />
+          <Button variant="contained" onClick={handlePrint}>
+            Print
+          </Button>
+          <br />
+          <br />
+          <Button variant="contained" onClick={handleSaveAsPDF}>
+            Save as PDF
+          </Button>
+          <br />
+          <br />
+          <Button variant="contained" LinkComponent={Link} to="/data">
+            Data
+          </Button>
+        </Box>
       </form>
     </Box>
   );
