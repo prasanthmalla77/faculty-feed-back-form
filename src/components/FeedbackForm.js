@@ -5,7 +5,7 @@ import top from "../images/top.png";
 import html2pdf from "html2pdf.js";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../firebase";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import Pdf from "./Pdf";
 import  './EvaluationForm.css'
 
@@ -96,9 +96,9 @@ const FeedbackForm = () => {
     }
   };
 
-  const handlePrint = () => {
-    window.print();
-  };
+  // const handlePrint = () => {
+  //   window.print();
+  // };
 
   const handleSaveAsPDF = () => {
     const element = document.getElementById("pageToSave");
@@ -288,9 +288,9 @@ const FeedbackForm = () => {
           </Snackbar>
           <br />
           <br />
-          <Button variant="contained" onClick={handlePrint}>
+          {/* <Button variant="contained" onClick={handlePrint}>
             Print
-          </Button>
+          </Button> */}
           <br />
           <br />
           <Button variant="contained" onClick={handleSaveAsPDF}>
@@ -298,12 +298,16 @@ const FeedbackForm = () => {
           </Button>
           <br />
           <br />
-          <Button variant="contained" LinkComponent={Link} to="/data">
+          {/* <Button variant="contained" LinkComponent={Link} to="/data">
             Data
-          </Button>
+          </Button> */}
+          <br/>
+          <br/>
+          
+          <Pdf combinedData={evaluations} formData={formData} />
         </Box>
       </form>
-      <Pdf combinedData={evaluations} formData={formData} />
+      
     </Box>
     </div>
   );

@@ -2,6 +2,7 @@ import React from 'react';
 import { PDFDocument, rgb } from 'pdf-lib';
 import { saveAs } from 'file-saver';
 import samplePDF from './samples.pdf';
+import { Button } from "@mui/material";
 
 function Pdf(props) {
   const combinedData = props.combinedData;
@@ -83,8 +84,9 @@ function Pdf(props) {
   };
 
   return (
-    <div>
-      <button onClick={modifyAndDownloadPDF}>Modify and Download PDF</button>
+    <div style={{ alignItems: 'center' }}>
+      <Button variant="contained" color='primary' onClick={modifyAndDownloadPDF}>Final Report </Button>
+
     </div>
   );
 }
