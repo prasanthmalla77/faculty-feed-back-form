@@ -4,7 +4,6 @@ import { useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 const Data = () => {
   const [data, setData] = useState([]);
-
   const fetchPost = async () => {
     await getDocs(collection(db, "feedback-form-data")).then(
       (querySnapshot) => {
@@ -13,7 +12,6 @@ const Data = () => {
           id: doc.id,
         }));
         setData(newData);
-        console.log(data, newData);
       }
     );
   };
@@ -25,27 +23,23 @@ const Data = () => {
     <div>
       <table>
         <tr>
-          <th>Name</th>
-          <th>Registered Number</th>
-          <th>Date of Birth</th>
-          <th>Father Name</th>
-          <th>Father Profession</th>
-          <th>Father Mobile</th>
-          <th>Father Email</th>
-          <th>Address</th>
-          <th>Feedback</th>
+          <th>academicYear</th>
+          <th>year</th>
+          <th>semester</th>
+          <th>branch</th>
+          <th>faculty</th>
+          <th>totalStudents</th>
+          <th>subject</th>
         </tr>
         {data.map((item) => (
           <tr>
-            <td>{item.name}</td>
-            <td>{item.registeredNumber}</td>
-            <td>{item.dob}</td>
-            <td>{item.fatherName}</td>
-            <td>{item.fatherProfession}</td>
-            <td>{item.fatherMobile}</td>
-            <td>{item.fatherEmail}</td>
-            <td>{item.address}</td>
-            <td>{item.feedback}</td>
+          <td>{item.academicYear}</td>
+            <td>{item.year}</td>
+            <td>{item.semester}</td>
+            <td>{item.branch}</td>
+            <td>{item.faculty}</td>
+            <td>{item.totalStudents}</td>
+            <td>{item.subject}</td>
           </tr>
         ))}
       </table>

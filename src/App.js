@@ -5,7 +5,7 @@ import Data from "./components/Data";
 
 function App() {
   return (
-    <div className="App">
+    <div className="App w-100">
       <Routes>
         <Route path="/mainpage" element={<MainPage />} />
         <Route path="/data" element={<Data />} />
