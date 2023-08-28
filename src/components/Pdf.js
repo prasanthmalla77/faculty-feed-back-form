@@ -8,7 +8,7 @@ function Pdf(props) {
   const combinedData = props.combinedData;
   const formData = props.formData;
   const data = combinedData;
-  console.log(props);
+  console.log(formData);
 
   const currentDate = new Date();
   const formattedDate = currentDate.toISOString().split('T')[0];
@@ -63,6 +63,20 @@ function Pdf(props) {
         const { height } = page.getSize();
         const fontSize = 12;
 
+        const x = 154;
+        const y = 247;
+
+        page.drawText(`${formData.faculty}`, {
+          x,
+          y: height - y,
+          size: fontSize,
+          color: rgb(0, 0, 0),
+        });
+      }
+      for (const page of pages) {
+        const { height } = page.getSize();
+        const fontSize = 12;
+
         const x = 465;
         const y = 178;
 
@@ -92,3 +106,4 @@ function Pdf(props) {
 }
 
 export default Pdf;
+ 
